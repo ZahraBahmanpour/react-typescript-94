@@ -11,7 +11,7 @@ function App() {
         value={queryString}
         handleChange={(text) => setQueryString(text)}
       />
-      <Products queryString={queryString} sortFields={["name"]} />
+      <Products queryString={queryString} sortField={"price"} />
       <ProductForm />
     </>
   );

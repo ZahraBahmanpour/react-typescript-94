@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Products = ({ queryString, sortFields }) => {
+const Products = ({ queryString, sortField }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -29,12 +29,18 @@ const Products = ({ queryString, sortFields }) => {
       <tr>
         <th
           style={{
-            textDecoration: sortFields.includes("name") ? "underline" : "",
+            textDecoration: sortField === "name" ? "underline" : "",
           }}
         >
           Name
         </th>
-        <th>Price</th>
+        <th
+          style={{
+            textDecoration: sortField === "price" ? "underline" : "",
+          }}
+        >
+          Price
+        </th>
       </tr>
       {products.map((p) => (
         <tr style={{ color: p.department === "Books" ? "red" : "black" }}>
