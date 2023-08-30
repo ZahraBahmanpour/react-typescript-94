@@ -1,12 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useRef, FC, FormEvent } from "react";
+import Product from "../models/ProductModel";
 
-const ProductForm = () => {
-  const [error, setError] = useState("");
-  const nameRef = useRef(null);
-  const priceRef = useRef(null);
-  const countRef = useRef(null);
+const ProductForm: FC = () => {
+  const [error, setError] = useState<string>("");
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const priceRef = useRef<HTMLInputElement | null>(null);
+  const countRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (nameRef.current?.value === "" || priceRef.current?.value === "") {
       setError("All fields are mandatory");
@@ -14,7 +15,7 @@ const ProductForm = () => {
 
     setError("");
 
-    const postData = async (newProduct) => {
+    const postData = async (newProduct: Partial<Product>) => {
       await fetch("https://6300a18859a8760a757d441c.mockapi.io/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -23,9 +24,9 @@ const ProductForm = () => {
     };
 
     postData({
-      name: nameRef.current.value,
-      price: priceRef.current.value,
-      countInStock: Number(countRef.current.value),
+      name: (nameRef.current as HTMLInputElement).value,
+      price: (priceRef.current as HTMLInputElement).value,
+      countInStock: Number((countRef.current as HTMLInputElement).value),
     });
   };
 
