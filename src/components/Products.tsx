@@ -1,8 +1,14 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import Product from "../models/ProductModel";
 
-const Products = ({ queryString, sortField }) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+interface Props {
+  queryString: string;
+  sortField: keyof Product;
+}
+
+const Products: FC<Props> = ({ queryString, sortField }) => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
