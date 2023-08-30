@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import Product from "../models/ProductModel";
+import ProductResponse from "../models/ProductResponse";
 
 interface Props {
   queryString: string;
@@ -16,7 +17,7 @@ const Products: FC<Props> = ({ queryString, sortField }) => {
         const response = await fetch(
           `https://6300a18859a8760a757d441c.mockapi.io/products?name=${queryString}`
         );
-        const data = await response.json();
+        const data: ProductResponse = await response.json();
         setProducts(data.products);
       } catch (e) {
         console.log(e);
